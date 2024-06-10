@@ -18,20 +18,28 @@ export const GET = async (request: NextRequest) => {
 
 export const POST = async (request: NextRequest) => {
   try {
-    const reqBody = await request.json()
-    const { desc } = reqBody
-    console.log(desc)
+    const reqBody = await request.json();
+    const { desc } = reqBody;
+    console.log(desc);
 
     const newTodo = new Todo({
       id: v4(),
       desc,
-      completed: false
-    })
+      completed: false,
+    });
 
-    const savedTodo = await newTodo.save()
+    const savedTodo = await newTodo.save();
 
-    return NextResponse.json({msg: "todo added", success: true, savedTodo})
+    return NextResponse.json({ msg: "todo added", success: true, savedTodo });
+  } catch (error) {
+    return NextResponse.json({ msg: "Issue happened!" }, { status: 500 });
+  }
+};
 
+export const DELETE = async (request: NextRequest) => {
+  try {
+    await Todo.deleteMany({})
+    return NextResponse.json({ msg: "todos cleared", success: true })
   } catch (error) {
     return NextResponse.json({ msg: "Issue happened!" }, { status: 500 });
   }
