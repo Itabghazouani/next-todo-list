@@ -19,14 +19,15 @@ export const GET = async () => {
 export const POST = async (request: NextRequest) => {
   try {
     const reqBody = await request.json();
-    const { desc, category } = reqBody;
+    const { desc, category, priority } = reqBody;
     console.log(desc, category);
 
     const newTodo = new Todo({
       id: v4(),
       desc,
       completed: false,
-      category
+      category,
+      priority
     });
 
     const savedTodo = await newTodo.save();
