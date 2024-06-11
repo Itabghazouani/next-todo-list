@@ -5,7 +5,7 @@ import { v4 } from "uuid";
 
 connect();
 
-export const GET = async (request: NextRequest) => {
+export const GET = async () => {
   try {
     const todos = await Todo.find({});
     console.log(todos);
@@ -22,21 +22,11 @@ export const POST = async (request: NextRequest) => {
     const { desc, category } = reqBody;
     console.log(desc, category);
 
-    let newCategory = category.toLowerCase();
-
-    // Check if the category already exists
-    const existingTodos = await Todo.find({ category });
-
-    if (existingTodos.length === 0) {
-      // If the category doesn't exist, create a new one
-      newCategory = category.trim();
-    }
-
     const newTodo = new Todo({
       id: v4(),
       desc,
       completed: false,
-      category,
+      category
     });
 
     const savedTodo = await newTodo.save();
@@ -47,7 +37,7 @@ export const POST = async (request: NextRequest) => {
   }
 };
 
-export const DELETE = async (request: NextRequest) => {
+export const DELETE = async () => {
   try {
     await Todo.deleteMany({})
     return NextResponse.json({ msg: "todos cleared", success: true })

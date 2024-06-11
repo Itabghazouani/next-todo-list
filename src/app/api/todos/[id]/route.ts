@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { connect } from "@/dbConfig/db";
 import Todo from "@/models/todo";
-import { v4 } from "uuid";
 
 connect();
 
@@ -43,9 +42,9 @@ export const PUT = async (request: NextRequest) => {
     const id = getIdFromPathname(path);
 
     const reqBody = await request.json();
-    const { desc, completed } = reqBody;
+    const { desc, completed, category } = reqBody;
 
-    const todo = await Todo.updateOne({ id }, { $set: { desc, completed } });
+    const todo = await Todo.updateOne({ id }, { $set: { desc, completed, category } });
 
     return NextResponse.json({ msg: "Todo edited", success: true });
   } catch (error) {

@@ -65,6 +65,20 @@ const TodosPage = () => {
 
   // Function to add a new todo
   const addTodo = async () => {
+
+    // Check if a description is entered
+    if (!newTodoDesc) {
+      alert("Please enter a description")
+      return
+    }
+
+    //Check if a category is selected
+    if (!newTodoCategory) {
+      alert("Please select a category")
+      return
+    }
+
+    // Send the request to the server to add a new todo
     const data = {
       desc: newTodoDesc,
       category: newTodoCategory
@@ -130,6 +144,19 @@ const TodosPage = () => {
 
   // Function to update a todo
   const updateTodo = async () => {
+
+    // Check if a category is selected
+    if (!editTodoInfo.desc) {
+      alert("Please select a description for the todo.");
+      return; // Exit function if category is not selected
+    }
+
+    // Check if a category is selected
+    if (!editTodoInfo.category) {
+      alert("Please select a category for the todo.");
+      return; // Exit function if category is not selected
+    }
+
     const data = {
       desc: editTodoInfo.desc,
       completed: editTodoInfo.completed,
