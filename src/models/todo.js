@@ -14,6 +14,10 @@ const TodoSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  category: {
+    type: String,
+    required: true,
+  },
 })
 
 const Todo = mongoose.models.todos || mongoose.model("todos", TodoSchema)
