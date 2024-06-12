@@ -26,8 +26,7 @@ export const POST = async (request: NextRequest) => {
       id: v4(),
       desc,
       completed: false,
-      category,
-      priority
+      category
     });
 
     const savedTodo = await newTodo.save();

@@ -42,9 +42,9 @@ export const PUT = async (request: NextRequest) => {
     const id = getIdFromPathname(path);
 
     const reqBody = await request.json();
-    const { desc, completed, category, priority } = reqBody;
+    const { desc, completed, category } = reqBody;
 
-    const todo = await Todo.updateOne({ id }, { $set: { desc, completed, category, priority } });
+    const todo = await Todo.updateOne({ id }, { $set: { desc, completed, category } });
 
     return NextResponse.json({ msg: "Todo edited", success: true });
   } catch (error) {

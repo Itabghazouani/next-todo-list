@@ -17,10 +17,6 @@ const TodoSchema = new mongoose.Schema({
   category: {
     type: String,
     required: true,
-  },
-  priority: {
-    type: String,
-    required: true,
   }
 })
 
